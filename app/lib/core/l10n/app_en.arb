@@ -1,0 +1,79 @@
+{
+  "@@locale": "en",
+  "appTitle": "Dor",
+
+  "authPhoneTitle": "Enter your mobile number",
+  "authPhoneSubtitle": "We'll send you a verification code by SMS.",
+  "authPhoneLabel": "Mobile number",
+  "authPhoneHint": "07X XXX XXXX",
+  "authSendCode": "Send code",
+  "authOtpTitle": "Enter the code",
+  "authOtpSubtitle": "We sent a 6-digit code to {phone}",
+  "@authOtpSubtitle": {
+    "placeholders": { "phone": { "type": "String" } }
+  },
+  "authOtpLabel": "Verification code",
+  "authVerify": "Verify",
+  "authResendCode": "Resend code",
+  "authCodeResent": "A new code is on its way.",
+  "authChangeNumber": "Change number",
+
+  "errorInvalidPhone": "Enter a valid Jordanian mobile number (077, 078 or 079).",
+  "errorInvalidOtp": "The code is incorrect or has expired.",
+  "errorNetwork": "No connection. Check your internet and try again.",
+  "errorRateLimited": "Too many attempts. Please wait a moment and try again.",
+  "errorForbidden": "You don't have permission to do that.",
+  "errorSessionExpired": "Your session has expired. Please sign in again.",
+  "errorUnknown": "Something went wrong. Please try again.",
+  "retry": "Try again",
+
+  "onboardingTitle": "Where do you live?",
+  "onboardingSubtitle": "We'll show you your neighborhood's water schedule.",
+  "governorateLabel": "Governorate",
+  "areaLabel": "Area",
+  "neighborhoodLabel": "Neighborhood",
+  "save": "Save",
+  "continueButton": "Continue",
+  "noOptions": "Nothing to choose from yet",
+
+  "scheduleTitle": "Water schedule",
+  "scheduleWeekTitle": "Weekly schedule",
+  "scheduleNoWater": "No water",
+  "scheduleWindow": "{time} · {hours, plural, =1{1 hour} other{{hours} hours}}",
+  "@scheduleWindow": {
+    "placeholders": {
+      "time": { "type": "String" },
+      "hours": { "type": "int" }
+    }
+  },
+  "scheduleNowTitle": "It's your water day",
+  "scheduleNowBody": "Scheduled supply until {end}",
+  "@scheduleNowBody": {
+    "placeholders": { "end": { "type": "String" } }
+  },
+  "scheduleNextTitle": "Next water day",
+  "scheduleNextIn": "{days, plural, =0{Today} =1{Tomorrow} other{In {days} days}}",
+  "@scheduleNextIn": {
+    "placeholders": { "days": { "type": "int" } }
+  },
+  "scheduleNextAt": "{day}, {time}",
+  "@scheduleNextAt": {
+    "placeholders": {
+      "day": { "type": "String" },
+      "time": { "type": "String" }
+    }
+  },
+  "scheduleNone": "No water schedule has been published for your neighborhood yet.",
+  "scheduleDisclaimer": "Times are published by the water utility and actual supply may vary.",
+  "today": "Today",
+
+  "settingsTitle": "Settings",
+  "settingsNeighborhood": "My neighborhood",
+  "settingsLanguage": "Language",
+  "languageArabic": "العربية",
+  "languageEnglish": "English",
+  "signOut": "Sign out",
+
+  "driverHomeTitle": "Driver mode",
+  "driverHomeBody": "Driver tools will appear here once your account is approved."
+}
