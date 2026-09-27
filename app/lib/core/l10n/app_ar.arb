@@ -1,7 +1,6 @@
 {
   "@@locale": "ar",
   "appTitle": "دور",
-
   "authPhoneTitle": "أدخل رقم هاتفك المحمول",
   "authPhoneSubtitle": "سنرسل لك رمز تحقق برسالة نصية.",
   "authPhoneLabel": "رقم الهاتف المحمول",
@@ -14,7 +13,6 @@
   "authResendCode": "إعادة إرسال الرمز",
   "authCodeResent": "تم إرسال رمز جديد.",
   "authChangeNumber": "تغيير الرقم",
-
   "errorInvalidPhone": "أدخل رقم هاتف أردنيًا صحيحًا (077 أو 078 أو 079).",
   "errorInvalidOtp": "الرمز غير صحيح أو منتهي الصلاحية.",
   "errorNetwork": "لا يوجد اتصال. تحقق من الإنترنت وحاول مرة أخرى.",
@@ -23,7 +21,6 @@
   "errorSessionExpired": "انتهت جلستك. يرجى تسجيل الدخول مرة أخرى.",
   "errorUnknown": "حدث خطأ ما. حاول مرة أخرى.",
   "retry": "حاول مرة أخرى",
-
   "onboardingTitle": "أين تسكن؟",
   "onboardingSubtitle": "سنعرض لك جدول دور المياه في حيّك.",
   "governorateLabel": "المحافظة",
@@ -32,7 +29,16 @@
   "save": "حفظ",
   "continueButton": "متابعة",
   "noOptions": "لا توجد خيارات بعد",
-
+  "locationUseCurrent": "استخدم موقعي الحالي",
+  "locationLocating": "جارٍ تحديد حيّك…",
+  "locationDetected": "وجدنا أنك في {neighborhood} حسب موقعك. تأكد من صحته ثم تابع.",
+  "locationOrChooseManually": "أو اختر يدويًا",
+  "locationServiceDisabled": "خدمة الموقع متوقفة. شغّلها أو اختر حيّك من القائمة أدناه.",
+  "locationPermissionDenied": "لم يتم منح إذن الموقع. يمكنك اختيار حيّك من القائمة أدناه.",
+  "locationPermissionDeniedForever": "الوصول إلى الموقع محظور لتطبيق دور. اسمح به من الإعدادات أو اختر حيّك أدناه.",
+  "locationUnavailable": "تعذّر تحديد موقعك. حاول مرة أخرى أو اختر حيّك أدناه.",
+  "locationOutsideCoverage": "دور لا يغطي موقعك الحالي بعد. اختر حيّك من القائمة أدناه.",
+  "locationOpenSettings": "فتح الإعدادات",
   "scheduleTitle": "جدول دور المياه",
   "scheduleWeekTitle": "الجدول الأسبوعي",
   "scheduleNoWater": "لا يوجد دور",
@@ -45,14 +51,12 @@
   "scheduleNone": "لم يُنشر جدول دور المياه لحيّك بعد.",
   "scheduleDisclaimer": "المواعيد صادرة عن شركة المياه وقد يختلف موعد الضخ الفعلي.",
   "today": "اليوم",
-
   "settingsTitle": "الإعدادات",
   "settingsNeighborhood": "حيّي",
   "settingsLanguage": "اللغة",
   "languageArabic": "العربية",
   "languageEnglish": "English",
   "signOut": "تسجيل الخروج",
-
   "driverHomeTitle": "وضع السائق",
   "driverHomeBody": "ستظهر أدوات السائق هنا بعد الموافقة على حسابك."
 }

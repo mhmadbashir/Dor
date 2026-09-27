@@ -10,16 +10,15 @@ WaterSchedule schedule(
   String id = 's',
   DateTime? from,
   DateTime? to,
-}) =>
-    WaterSchedule(
-      id: id,
-      neighborhoodId: 'n',
-      weekday: weekday,
-      startMinutes: hour * 60,
-      durationHours: durationHours,
-      effectiveFrom: from,
-      effectiveTo: to,
-    );
+}) => WaterSchedule(
+  id: id,
+  neighborhoodId: 'n',
+  weekday: weekday,
+  startMinutes: hour * 60,
+  durationHours: durationHours,
+  effectiveFrom: from,
+  effectiveTo: to,
+);
 
 /// Amman wall-clock. 2026-09-27 is a Sunday.
 DateTime at(int day, int hour, [int minute = 0]) => DateTime.utc(2026, 9, day, hour, minute);
@@ -45,7 +44,9 @@ void main() {
 
     test('next window later this week', () {
       // Tuesday 08:00; now is Sunday noon.
-      final result = WaterScheduleCalculator.outlook([schedule(DateTime.tuesday, 8, 48)], at(27, 12));
+      final result = WaterScheduleCalculator.outlook([
+        schedule(DateTime.tuesday, 8, 48),
+      ], at(27, 12));
       expect(result, isA<WaterScheduledNext>());
       final next = result as WaterScheduledNext;
       expect(next.window.start, at(29, 8));
@@ -54,12 +55,16 @@ void main() {
     });
 
     test('tomorrow is one day away even if less than 24h', () {
-      final result = WaterScheduleCalculator.outlook([schedule(DateTime.monday, 6, 12)], at(27, 22));
+      final result = WaterScheduleCalculator.outlook([
+        schedule(DateTime.monday, 6, 12),
+      ], at(27, 22));
       expect((result as WaterScheduledNext).daysUntil, 1);
     });
 
     test('later today is zero days away', () {
-      final result = WaterScheduleCalculator.outlook([schedule(DateTime.sunday, 18, 12)], at(27, 9));
+      final result = WaterScheduleCalculator.outlook([
+        schedule(DateTime.sunday, 18, 12),
+      ], at(27, 9));
       expect((result as WaterScheduledNext).daysUntil, 0);
     });
 
@@ -71,7 +76,9 @@ void main() {
 
     test('a multi-day window that started last week is still current', () {
       // Saturday 18:00 for 48h covers Sunday and Monday.
-      final result = WaterScheduleCalculator.outlook([schedule(DateTime.saturday, 18, 48)], at(28, 10));
+      final result = WaterScheduleCalculator.outlook([
+        schedule(DateTime.saturday, 18, 48),
+      ], at(28, 10));
       expect(result, isA<WaterScheduledNow>());
       expect((result as WaterScheduledNow).window.start, at(26, 18));
     });
@@ -118,7 +125,9 @@ void main() {
 
   group('weeklyPattern', () {
     test('runs Saturday to Friday and marks today', () {
-      final week = WaterScheduleCalculator.weeklyPattern([schedule(DateTime.tuesday, 8, 48)], at(27, 12));
+      final week = WaterScheduleCalculator.weeklyPattern([
+        schedule(DateTime.tuesday, 8, 48),
+      ], at(27, 12));
       expect(week.map((d) => d.weekday), [6, 7, 1, 2, 3, 4, 5]);
       expect(week.where((d) => d.isToday).single.weekday, DateTime.sunday);
       expect(week.firstWhere((d) => d.weekday == DateTime.tuesday).schedules, hasLength(1));

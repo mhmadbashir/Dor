@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Dor uses your location to find your neighborhood and its water schedule. / يستخدم دور موقعك لتحديد حيّك وجدول دور المياه فيه.</string>
 	<key>CFBundleLocalizations</key>
 	<array>
 		<string>ar</string>

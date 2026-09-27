@@ -272,6 +272,66 @@ abstract class AppLocalizations {
   /// **'Nothing to choose from yet'**
   String get noOptions;
 
+  /// No description provided for @locationUseCurrent.
+  ///
+  /// In en, this message translates to:
+  /// **'Use my current location'**
+  String get locationUseCurrent;
+
+  /// No description provided for @locationLocating.
+  ///
+  /// In en, this message translates to:
+  /// **'Finding your neighborhood…'**
+  String get locationLocating;
+
+  /// No description provided for @locationDetected.
+  ///
+  /// In en, this message translates to:
+  /// **'We found {neighborhood} from your location. Check it\'s right, then continue.'**
+  String locationDetected(String neighborhood);
+
+  /// No description provided for @locationOrChooseManually.
+  ///
+  /// In en, this message translates to:
+  /// **'Or choose manually'**
+  String get locationOrChooseManually;
+
+  /// No description provided for @locationServiceDisabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Location is turned off. Turn it on, or choose your neighborhood below.'**
+  String get locationServiceDisabled;
+
+  /// No description provided for @locationPermissionDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'Location permission wasn\'t granted. You can choose your neighborhood below.'**
+  String get locationPermissionDenied;
+
+  /// No description provided for @locationPermissionDeniedForever.
+  ///
+  /// In en, this message translates to:
+  /// **'Location access is blocked for Dor. Allow it in settings, or choose your neighborhood below.'**
+  String get locationPermissionDeniedForever;
+
+  /// No description provided for @locationUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'We couldn\'t get your location. Try again, or choose your neighborhood below.'**
+  String get locationUnavailable;
+
+  /// No description provided for @locationOutsideCoverage.
+  ///
+  /// In en, this message translates to:
+  /// **'Dor doesn\'t cover your current location yet. Choose your neighborhood below.'**
+  String get locationOutsideCoverage;
+
+  /// No description provided for @locationOpenSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Open settings'**
+  String get locationOpenSettings;
+
   /// No description provided for @scheduleTitle.
   ///
   /// In en, this message translates to:

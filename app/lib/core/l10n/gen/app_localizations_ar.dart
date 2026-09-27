@@ -101,6 +101,43 @@ class AppLocalizationsAr extends AppLocalizations {
   String get noOptions => 'لا توجد خيارات بعد';
 
   @override
+  String get locationUseCurrent => 'استخدم موقعي الحالي';
+
+  @override
+  String get locationLocating => 'جارٍ تحديد حيّك…';
+
+  @override
+  String locationDetected(String neighborhood) {
+    return 'وجدنا أنك في $neighborhood حسب موقعك. تأكد من صحته ثم تابع.';
+  }
+
+  @override
+  String get locationOrChooseManually => 'أو اختر يدويًا';
+
+  @override
+  String get locationServiceDisabled =>
+      'خدمة الموقع متوقفة. شغّلها أو اختر حيّك من القائمة أدناه.';
+
+  @override
+  String get locationPermissionDenied =>
+      'لم يتم منح إذن الموقع. يمكنك اختيار حيّك من القائمة أدناه.';
+
+  @override
+  String get locationPermissionDeniedForever =>
+      'الوصول إلى الموقع محظور لتطبيق دور. اسمح به من الإعدادات أو اختر حيّك أدناه.';
+
+  @override
+  String get locationUnavailable =>
+      'تعذّر تحديد موقعك. حاول مرة أخرى أو اختر حيّك أدناه.';
+
+  @override
+  String get locationOutsideCoverage =>
+      'دور لا يغطي موقعك الحالي بعد. اختر حيّك من القائمة أدناه.';
+
+  @override
+  String get locationOpenSettings => 'فتح الإعدادات';
+
+  @override
   String get scheduleTitle => 'جدول دور المياه';
 
   @override

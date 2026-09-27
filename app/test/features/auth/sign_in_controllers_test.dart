@@ -36,7 +36,9 @@ void main() {
       when(() => auth.sendOtp(any())).thenAnswer((_) async {});
       container.listen(sendCodeControllerProvider, (_, _) {});
 
-      final result = await container.read(sendCodeControllerProvider.notifier).sendCode('٠٧٩ ١٢٣ ٤٥٦٧');
+      final result = await container
+          .read(sendCodeControllerProvider.notifier)
+          .sendCode('٠٧٩ ١٢٣ ٤٥٦٧');
 
       expect(result?.e164, '+962791234567');
       verify(() => auth.sendOtp(PhoneNumber.tryParse('0791234567')!)).called(1);
@@ -46,7 +48,9 @@ void main() {
       when(() => auth.sendOtp(any())).thenThrow(const Failure(FailureKind.rateLimited));
       final sub = container.listen(sendCodeControllerProvider, (_, _) {});
 
-      final result = await container.read(sendCodeControllerProvider.notifier).sendCode('0791234567');
+      final result = await container
+          .read(sendCodeControllerProvider.notifier)
+          .sendCode('0791234567');
 
       expect(result, isNull);
       expect((sub.read().error! as Failure).kind, FailureKind.rateLimited);
@@ -69,7 +73,9 @@ void main() {
       when(() => auth.verifyOtp(any(), any())).thenAnswer((_) async {});
       container.listen(verifyCodeControllerProvider, (_, _) {});
 
-      final ok = await container.read(verifyCodeControllerProvider.notifier).verify(phone, '١٢٣٤٥٦');
+      final ok = await container
+          .read(verifyCodeControllerProvider.notifier)
+          .verify(phone, '١٢٣٤٥٦');
 
       expect(ok, isTrue);
       verify(() => auth.verifyOtp(phone, '123456')).called(1);

@@ -1,7 +1,6 @@
 {
   "@@locale": "en",
   "appTitle": "Dor",
-
   "authPhoneTitle": "Enter your mobile number",
   "authPhoneSubtitle": "We'll send you a verification code by SMS.",
   "authPhoneLabel": "Mobile number",
@@ -10,14 +9,17 @@
   "authOtpTitle": "Enter the code",
   "authOtpSubtitle": "We sent a 6-digit code to {phone}",
   "@authOtpSubtitle": {
-    "placeholders": { "phone": { "type": "String" } }
+    "placeholders": {
+      "phone": {
+        "type": "String"
+      }
+    }
   },
   "authOtpLabel": "Verification code",
   "authVerify": "Verify",
   "authResendCode": "Resend code",
   "authCodeResent": "A new code is on its way.",
   "authChangeNumber": "Change number",
-
   "errorInvalidPhone": "Enter a valid Jordanian mobile number (077, 078 or 079).",
   "errorInvalidOtp": "The code is incorrect or has expired.",
   "errorNetwork": "No connection. Check your internet and try again.",
@@ -26,7 +28,6 @@
   "errorSessionExpired": "Your session has expired. Please sign in again.",
   "errorUnknown": "Something went wrong. Please try again.",
   "retry": "Try again",
-
   "onboardingTitle": "Where do you live?",
   "onboardingSubtitle": "We'll show you your neighborhood's water schedule.",
   "governorateLabel": "Governorate",
@@ -35,45 +36,75 @@
   "save": "Save",
   "continueButton": "Continue",
   "noOptions": "Nothing to choose from yet",
-
+  "locationUseCurrent": "Use my current location",
+  "locationLocating": "Finding your neighborhood…",
+  "locationDetected": "We found {neighborhood} from your location. Check it's right, then continue.",
+  "@locationDetected": {
+    "placeholders": {
+      "neighborhood": {
+        "type": "String"
+      }
+    }
+  },
+  "locationOrChooseManually": "Or choose manually",
+  "locationServiceDisabled": "Location is turned off. Turn it on, or choose your neighborhood below.",
+  "locationPermissionDenied": "Location permission wasn't granted. You can choose your neighborhood below.",
+  "locationPermissionDeniedForever": "Location access is blocked for Dor. Allow it in settings, or choose your neighborhood below.",
+  "locationUnavailable": "We couldn't get your location. Try again, or choose your neighborhood below.",
+  "locationOutsideCoverage": "Dor doesn't cover your current location yet. Choose your neighborhood below.",
+  "locationOpenSettings": "Open settings",
   "scheduleTitle": "Water schedule",
   "scheduleWeekTitle": "Weekly schedule",
   "scheduleNoWater": "No water",
   "scheduleWindow": "{time} · {hours, plural, =1{1 hour} other{{hours} hours}}",
   "@scheduleWindow": {
     "placeholders": {
-      "time": { "type": "String" },
-      "hours": { "type": "int" }
+      "time": {
+        "type": "String"
+      },
+      "hours": {
+        "type": "int"
+      }
     }
   },
   "scheduleNowTitle": "It's your water day",
   "scheduleNowBody": "Scheduled supply until {end}",
   "@scheduleNowBody": {
-    "placeholders": { "end": { "type": "String" } }
+    "placeholders": {
+      "end": {
+        "type": "String"
+      }
+    }
   },
   "scheduleNextTitle": "Next water day",
   "scheduleNextIn": "{days, plural, =0{Today} =1{Tomorrow} other{In {days} days}}",
   "@scheduleNextIn": {
-    "placeholders": { "days": { "type": "int" } }
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
   },
   "scheduleNextAt": "{day}, {time}",
   "@scheduleNextAt": {
     "placeholders": {
-      "day": { "type": "String" },
-      "time": { "type": "String" }
+      "day": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
     }
   },
   "scheduleNone": "No water schedule has been published for your neighborhood yet.",
   "scheduleDisclaimer": "Times are published by the water utility and actual supply may vary.",
   "today": "Today",
-
   "settingsTitle": "Settings",
   "settingsNeighborhood": "My neighborhood",
   "settingsLanguage": "Language",
   "languageArabic": "العربية",
   "languageEnglish": "English",
   "signOut": "Sign out",
-
   "driverHomeTitle": "Driver mode",
   "driverHomeBody": "Driver tools will appear here once your account is approved."
 }

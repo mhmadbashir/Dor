@@ -8,13 +8,19 @@ void main() {
 
   test('auth errors', () {
     expect(kindOf(const AuthApiException('x', statusCode: '429')), FailureKind.rateLimited);
-    expect(kindOf(const AuthApiException('x', statusCode: '403', code: 'otp_expired')), FailureKind.invalidOtp);
+    expect(
+      kindOf(const AuthApiException('x', statusCode: '403', code: 'otp_expired')),
+      FailureKind.invalidOtp,
+    );
     expect(kindOf(AuthRetryableFetchException()), FailureKind.network);
   });
 
   test('postgrest errors', () {
     expect(kindOf(const PostgrestException(message: 'x', code: '42501')), FailureKind.forbidden);
-    expect(kindOf(const PostgrestException(message: 'x', code: 'PGRST303')), FailureKind.sessionExpired);
+    expect(
+      kindOf(const PostgrestException(message: 'x', code: 'PGRST303')),
+      FailureKind.sessionExpired,
+    );
   });
 
   test('failures pass through and unknown errors map to unknown', () {

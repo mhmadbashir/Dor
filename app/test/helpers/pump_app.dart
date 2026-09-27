@@ -11,16 +11,18 @@ extension PumpApp on WidgetTester {
     String locale = 'ar',
     List<Override> overrides = const [],
   }) async {
-    await pumpWidget(ProviderScope(
-      overrides: overrides,
-      retry: (_, _) => null,
-      child: MaterialApp(
-        locale: Locale(locale),
-        supportedLocales: AppLocalizations.supportedLocales,
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
-        home: screen,
+    await pumpWidget(
+      ProviderScope(
+        overrides: overrides,
+        retry: (_, _) => null,
+        child: MaterialApp(
+          locale: Locale(locale),
+          supportedLocales: AppLocalizations.supportedLocales,
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          home: screen,
+        ),
       ),
-    ));
+    );
     await pumpAndSettle();
   }
 }

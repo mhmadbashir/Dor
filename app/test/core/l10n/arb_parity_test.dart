@@ -6,7 +6,8 @@ import 'package:flutter_test/flutter_test.dart';
 Map<String, dynamic> _load(String locale) =>
     jsonDecode(File('lib/core/l10n/app_$locale.arb').readAsStringSync()) as Map<String, dynamic>;
 
-Set<String> _messageKeys(Map<String, dynamic> arb) => arb.keys.where((k) => !k.startsWith('@')).toSet();
+Set<String> _messageKeys(Map<String, dynamic> arb) =>
+    arb.keys.where((k) => !k.startsWith('@')).toSet();
 
 void main() {
   test('Arabic and English ARB files define the same messages', () {
@@ -21,7 +22,8 @@ void main() {
     final en = _load('en');
     for (final key in _messageKeys(en)) {
       final meta = en['@$key'] as Map<String, dynamic>?;
-      final placeholders = (meta?['placeholders'] as Map<String, dynamic>?)?.keys ?? const <String>[];
+      final placeholders =
+          (meta?['placeholders'] as Map<String, dynamic>?)?.keys ?? const <String>[];
       for (final name in placeholders) {
         expect(ar[key] as String, contains('{$name'), reason: '$key is missing {$name}');
       }

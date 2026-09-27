@@ -104,6 +104,43 @@ class AppLocalizationsEn extends AppLocalizations {
   String get noOptions => 'Nothing to choose from yet';
 
   @override
+  String get locationUseCurrent => 'Use my current location';
+
+  @override
+  String get locationLocating => 'Finding your neighborhood…';
+
+  @override
+  String locationDetected(String neighborhood) {
+    return 'We found $neighborhood from your location. Check it\'s right, then continue.';
+  }
+
+  @override
+  String get locationOrChooseManually => 'Or choose manually';
+
+  @override
+  String get locationServiceDisabled =>
+      'Location is turned off. Turn it on, or choose your neighborhood below.';
+
+  @override
+  String get locationPermissionDenied =>
+      'Location permission wasn\'t granted. You can choose your neighborhood below.';
+
+  @override
+  String get locationPermissionDeniedForever =>
+      'Location access is blocked for Dor. Allow it in settings, or choose your neighborhood below.';
+
+  @override
+  String get locationUnavailable =>
+      'We couldn\'t get your location. Try again, or choose your neighborhood below.';
+
+  @override
+  String get locationOutsideCoverage =>
+      'Dor doesn\'t cover your current location yet. Choose your neighborhood below.';
+
+  @override
+  String get locationOpenSettings => 'Open settings';
+
+  @override
   String get scheduleTitle => 'Water schedule';
 
   @override

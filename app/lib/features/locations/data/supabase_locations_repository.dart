@@ -1,6 +1,7 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../core/errors/error_mapper.dart';
+import '../domain/device_location.dart';
 import '../domain/location_entities.dart';
 import '../domain/locations_repository.dart';
 import 'location_dtos.dart';
@@ -49,5 +50,16 @@ class SupabaseLocationsRepository implements LocationsRepository {
         .eq('id', neighborhoodId)
         .single();
     return LocationDtos.details(row);
+  });
+
+  @override
+  Future<NeighborhoodDetails?> nearestNeighborhood(GeoPoint point) => guard(() async {
+    final rows = await _client.rpc<List<dynamic>>(
+      'nearest_neighborhood',
+      params: {'p_lat': point.latitude, 'p_lng': point.longitude},
+    );
+    if (rows.isEmpty) return null;
+    final id = (rows.first as Map<String, dynamic>)['neighborhood_id'] as String;
+    return neighborhoodDetails(id);
   });
 }

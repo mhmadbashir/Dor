@@ -10,7 +10,7 @@ confirm when water actually arrives, and order fairly priced water tankers.
 
 | Phase | Scope | Status |
 |---|---|---|
-| 1 | Project setup, phone OTP auth, neighborhood selection, weekly schedule | ✅ Done |
+| 1 | Project setup, phone OTP auth, neighborhood selection (GPS auto-detect + manual), weekly schedule | ✅ Done |
 | 2 | Crowd reports, live neighborhood status, push notifications | ⏳ |
 | 3 | Tanker ordering, driver mode, live tracking | ⏳ |
 | 4 | Admin dashboard (Flutter web) | ⏳ |
@@ -69,5 +69,9 @@ Key conventions:
   `core/time/amman_time.dart`.
 - **Weekdays** are ISO (1 = Monday … 7 = Sunday) in both the DB and Dart. The UI shows
   the Jordanian week, Saturday → Friday.
+- **Location**: during onboarding the app asks for location permission and suggests the
+  nearest served neighborhood (`nearest_neighborhood()` RPC, up to 5 km from a neighborhood
+  center). The user confirms it, and the manual picker always stays available. Coordinates
+  are never stored.
 - **Security**: RLS is enabled on every table. Users can't change their own `role` or
   `phone` (a trigger enforces this).

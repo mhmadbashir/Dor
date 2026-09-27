@@ -58,7 +58,10 @@ void main() {
       expect(AuthGate.from(const AsyncLoading(), const AsyncLoading()), const GateLoading());
       expect(AuthGate.from(const AsyncData(null), const AsyncData(null)), const GateSignedOut());
       expect(AuthGate.from(const AsyncData('u'), const AsyncLoading()), const GateLoading());
-      expect(AuthGate.from(const AsyncData('u'), const AsyncData(household)), const GateSignedIn(household));
+      expect(
+        AuthGate.from(const AsyncData('u'), const AsyncData(household)),
+        const GateSignedIn(household),
+      );
       expect(
         AuthGate.from(const AsyncData('u'), AsyncError(Exception(), StackTrace.empty)),
         const GateError(),
@@ -66,7 +69,10 @@ void main() {
     });
 
     test("ignores a previous user's profile", () {
-      expect(AuthGate.from(const AsyncData('other'), const AsyncData(household)), const GateLoading());
+      expect(
+        AuthGate.from(const AsyncData('other'), const AsyncData(household)),
+        const GateLoading(),
+      );
     });
   });
 }

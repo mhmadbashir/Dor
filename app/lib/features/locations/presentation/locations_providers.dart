@@ -1,7 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/services/supabase_providers.dart';
+import '../data/geolocator_location_service.dart';
 import '../data/supabase_locations_repository.dart';
+import '../domain/device_location.dart';
 import '../domain/location_entities.dart';
 import '../domain/locations_repository.dart';
 
@@ -24,4 +26,8 @@ final neighborhoodsProvider = FutureProvider.autoDispose.family<List<Neighborhoo
 final neighborhoodDetailsProvider = FutureProvider.autoDispose.family<NeighborhoodDetails, String>(
   (ref, neighborhoodId) =>
       ref.watch(locationsRepositoryProvider).neighborhoodDetails(neighborhoodId),
+);
+
+final deviceLocationServiceProvider = Provider<DeviceLocationService>(
+  (ref) => const GeolocatorLocationService(),
 );
