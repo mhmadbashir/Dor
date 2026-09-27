@@ -11,7 +11,9 @@ class NotificationPrefsController extends Notifier<AsyncValue<void>> {
 
   Future<void> setScheduleReminder(bool enabled) => _save(scheduleReminder: enabled);
 
-  Future<void> _save({bool? waterArrival, bool? scheduleReminder}) async {
+  Future<void> setScheduleStart(bool enabled) => _save(scheduleStart: enabled);
+
+  Future<void> _save({bool? waterArrival, bool? scheduleReminder, bool? scheduleStart}) async {
     final userId = ref.read(authRepositoryProvider).currentUserId;
     if (userId == null) return;
     state = const AsyncLoading();
@@ -22,6 +24,7 @@ class NotificationPrefsController extends Notifier<AsyncValue<void>> {
             userId,
             waterArrival: waterArrival,
             scheduleReminder: scheduleReminder,
+            scheduleStart: scheduleStart,
           );
       ref.invalidate(myProfileProvider);
       await ref.read(myProfileProvider.future);

@@ -7,7 +7,13 @@ abstract interface class ProfileRepository {
   /// Saves where the user lives; [elevationBand] null means "not sure".
   Future<void> updateHome(String userId, String neighborhoodId, ElevationBand? elevationBand);
 
-  Future<void> updateNotificationPrefs(String userId, {bool? waterArrival, bool? scheduleReminder});
+  /// Only the preferences passed (non-null) are changed.
+  Future<void> updateNotificationPrefs(
+    String userId, {
+    bool? waterArrival,
+    bool? scheduleReminder,
+    bool? scheduleStart,
+  });
 
   Future<void> updateLocale(String userId, String locale);
 }

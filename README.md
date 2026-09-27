@@ -77,8 +77,11 @@ set by admins. Live status is computed per level:
   a lower home also counts for higher homes. "Not sure" counts as middle.
 - Alerts: "water arrived" goes to homes at the level that just started flowing (not to
   the people who reported it). "Water reached lower homes, yours usually later" goes to
-  higher levels that are still dry. Each is sent at most once per 12 hours per level. A
-  reminder is sent at 20:00 the evening before a scheduled water day.
+  higher levels that are still dry. Each is sent at most once per 12 hours per level.
+- Schedule reminders: at 20:00 the evening before a water day ("water day tomorrow, starts
+  at 8:00 AM"), and at the scheduled start time ("your water day starts now, per the
+  schedule"). The start reminder skips homes whose level is already confirmed flowing.
+  Each notification type has its own switch in Settings.
 - Suspicious reports are flagged for admin review, not blocked: a report for a
   neighborhood other than the user's home, a brand-new account, many neighborhoods in a
   day, or contradicting ≥ 80% of 10+ reports at the same level. Admin-rejected reports

@@ -253,6 +253,16 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String pushScheduleStartTitle(String neighborhood) {
+    return 'Your water day in $neighborhood starts now';
+  }
+
+  @override
+  String pushScheduleStartBody(String time) {
+    return 'Supply is scheduled from $time. We\'ll let you know when neighbors confirm water has arrived.';
+  }
+
+  @override
   String get elevationTitle => 'Where is your home in the neighborhood?';
 
   @override
@@ -382,6 +392,13 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get settingsNotifyReminderSubtitle =>
       'The evening before your scheduled water day.';
+
+  @override
+  String get settingsNotifyStart => 'Water day starts';
+
+  @override
+  String get settingsNotifyStartSubtitle =>
+      'At the scheduled start time on your water day.';
 
   @override
   String bandReports(int count) {

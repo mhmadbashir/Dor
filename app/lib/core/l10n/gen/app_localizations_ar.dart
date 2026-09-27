@@ -254,6 +254,16 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
+  String pushScheduleStartTitle(String neighborhood) {
+    return 'بدأ دور المياه في $neighborhood';
+  }
+
+  @override
+  String pushScheduleStartBody(String time) {
+    return 'الضخ مجدول من الساعة $time. سنخبرك عندما يؤكد جيرانك وصول المياه.';
+  }
+
+  @override
   String get elevationTitle => 'أين يقع منزلك في الحي؟';
 
   @override
@@ -389,6 +399,13 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get settingsNotifyReminderSubtitle =>
       'مساء اليوم الذي يسبق يوم الدور المجدول.';
+
+  @override
+  String get settingsNotifyStart => 'بدء يوم الدور';
+
+  @override
+  String get settingsNotifyStartSubtitle =>
+      'عند موعد بدء الضخ المجدول في يوم الدور.';
 
   @override
   String bandReports(int count) {

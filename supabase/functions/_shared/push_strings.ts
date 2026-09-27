@@ -6,7 +6,9 @@ export const pushStrings = {
     "pushReachedLowerTitle": "وصلت المياه إلى {neighborhood}",
     "pushReachedLowerBody": "المياه تصل الآن إلى المناطق المنخفضة من الحي، وعادةً تصل إلى المنازل المرتفعة لاحقًا.",
     "pushReminderTitle": "غدًا دور المياه في {neighborhood}",
-    "pushReminderBody": "يبدأ الضخ المجدول الساعة {time}. جهّز خزاناتك."
+    "pushReminderBody": "يبدأ الضخ المجدول الساعة {time}. جهّز خزاناتك.",
+    "pushScheduleStartTitle": "بدأ دور المياه في {neighborhood}",
+    "pushScheduleStartBody": "الضخ مجدول من الساعة {time}. سنخبرك عندما يؤكد جيرانك وصول المياه."
   },
   "en": {
     "pushWaterArrivedTitle": "Water arrived in {neighborhood}",
@@ -14,7 +16,9 @@ export const pushStrings = {
     "pushReachedLowerTitle": "Water reached {neighborhood}",
     "pushReachedLowerBody": "It's flowing in the lower parts of the neighborhood. Homes on higher ground usually get it later.",
     "pushReminderTitle": "Water day tomorrow in {neighborhood}",
-    "pushReminderBody": "Supply is scheduled to start at {time}. Get your tanks ready."
+    "pushReminderBody": "Supply is scheduled to start at {time}. Get your tanks ready.",
+    "pushScheduleStartTitle": "Your water day in {neighborhood} starts now",
+    "pushScheduleStartBody": "Supply is scheduled from {time}. We'll let you know when neighbors confirm water has arrived."
   }
 } as const;
 

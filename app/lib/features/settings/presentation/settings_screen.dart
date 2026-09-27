@@ -81,6 +81,16 @@ class SettingsScreen extends ConsumerWidget {
                 ? null
                 : ref.read(notificationPrefsControllerProvider.notifier).setScheduleReminder,
           ),
+          SwitchListTile(
+            key: const Key('notifyStartSwitch'),
+            secondary: const Icon(Icons.schedule_outlined),
+            title: Text(l10n.settingsNotifyStart),
+            subtitle: Text(l10n.settingsNotifyStartSubtitle),
+            value: profile?.notifyScheduleStart ?? true,
+            onChanged: profile == null
+                ? null
+                : ref.read(notificationPrefsControllerProvider.notifier).setScheduleStart,
+          ),
           const Divider(),
           const SignOutTile(),
         ],

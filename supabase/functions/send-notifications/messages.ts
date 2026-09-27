@@ -1,6 +1,6 @@
 import { type PushKey, type PushLocale, pushStrings } from "../_shared/push_strings.ts";
 
-export type OutboxKind = "water_arrived" | "water_reached_lower" | "schedule_reminder";
+export type OutboxKind = "water_arrived" | "water_reached_lower" | "schedule_reminder" | "schedule_start";
 
 export interface OutboxRow {
   id: number;
@@ -21,6 +21,7 @@ const keys: Record<OutboxKind, [PushKey, PushKey]> = {
   water_arrived: ["pushWaterArrivedTitle", "pushWaterArrivedBody"],
   water_reached_lower: ["pushReachedLowerTitle", "pushReachedLowerBody"],
   schedule_reminder: ["pushReminderTitle", "pushReminderBody"],
+  schedule_start: ["pushScheduleStartTitle", "pushScheduleStartBody"],
 };
 
 export function resolveLocale(locale: string | null | undefined): PushLocale {

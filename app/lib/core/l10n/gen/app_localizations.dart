@@ -488,6 +488,18 @@ abstract class AppLocalizations {
   /// **'Supply is scheduled to start at {time}. Get your tanks ready.'**
   String pushReminderBody(String time);
 
+  /// No description provided for @pushScheduleStartTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your water day in {neighborhood} starts now'**
+  String pushScheduleStartTitle(String neighborhood);
+
+  /// No description provided for @pushScheduleStartBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Supply is scheduled from {time}. We\'ll let you know when neighbors confirm water has arrived.'**
+  String pushScheduleStartBody(String time);
+
   /// No description provided for @elevationTitle.
   ///
   /// In en, this message translates to:
@@ -691,6 +703,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'The evening before your scheduled water day.'**
   String get settingsNotifyReminderSubtitle;
+
+  /// No description provided for @settingsNotifyStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Water day starts'**
+  String get settingsNotifyStart;
+
+  /// No description provided for @settingsNotifyStartSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'At the scheduled start time on your water day.'**
+  String get settingsNotifyStartSubtitle;
 
   /// No description provided for @bandReports.
   ///

@@ -32,11 +32,13 @@ class SupabaseProfileRepository implements ProfileRepository {
     String userId, {
     bool? waterArrival,
     bool? scheduleReminder,
+    bool? scheduleStart,
   }) => guard(
     () => _profiles
         .update({
           'notify_water_arrival': ?waterArrival,
           'notify_schedule_reminder': ?scheduleReminder,
+          'notify_schedule_start': ?scheduleStart,
         })
         .eq('id', userId),
   );

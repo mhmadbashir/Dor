@@ -141,6 +141,22 @@
       }
     }
   },
+  "pushScheduleStartTitle": "Your water day in {neighborhood} starts now",
+  "@pushScheduleStartTitle": {
+    "placeholders": {
+      "neighborhood": {
+        "type": "String"
+      }
+    }
+  },
+  "pushScheduleStartBody": "Supply is scheduled from {time}. We'll let you know when neighbors confirm water has arrived.",
+  "@pushScheduleStartBody": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
   "elevationTitle": "Where is your home in the neighborhood?",
   "elevationSubtitle": "Water reaches low-lying homes first and homes on hills last, so we match you with neighbors at your level.",
   "elevationLow": "Low ground",
@@ -220,6 +236,8 @@
   "settingsNotifyArrivalSubtitle": "When neighbors at your level confirm water is flowing.",
   "settingsNotifyReminder": "Water day reminder",
   "settingsNotifyReminderSubtitle": "The evening before your scheduled water day.",
+  "settingsNotifyStart": "Water day starts",
+  "settingsNotifyStartSubtitle": "At the scheduled start time on your water day.",
   "bandReports": "{count, plural, =1{1 report} other{{count} reports}}",
   "@bandReports": {
     "placeholders": {

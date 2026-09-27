@@ -12,6 +12,7 @@ class Profile {
     this.elevationBand,
     this.notifyWaterArrival = true,
     this.notifyScheduleReminder = true,
+    this.notifyScheduleStart = true,
   });
 
   final String id;
@@ -25,6 +26,7 @@ class Profile {
   final ElevationBand? elevationBand;
   final bool notifyWaterArrival;
   final bool notifyScheduleReminder;
+  final bool notifyScheduleStart;
 
   bool get hasNeighborhood => neighborhoodId != null;
 
@@ -39,7 +41,8 @@ class Profile {
       other.locale == locale &&
       other.elevationBand == elevationBand &&
       other.notifyWaterArrival == notifyWaterArrival &&
-      other.notifyScheduleReminder == notifyScheduleReminder;
+      other.notifyScheduleReminder == notifyScheduleReminder &&
+      other.notifyScheduleStart == notifyScheduleStart;
 
   @override
   int get hashCode => Object.hash(
@@ -52,5 +55,6 @@ class Profile {
     elevationBand,
     notifyWaterArrival,
     notifyScheduleReminder,
+    notifyScheduleStart,
   );
 }

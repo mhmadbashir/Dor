@@ -5,7 +5,7 @@ import '../domain/user_role.dart';
 abstract final class ProfileDto {
   static const columns =
       'id, role, full_name, phone, neighborhood_id, locale, elevation_band, '
-      'notify_water_arrival, notify_schedule_reminder';
+      'notify_water_arrival, notify_schedule_reminder, notify_schedule_start';
 
   static Profile fromRow(Map<String, dynamic> row) => Profile(
     id: row['id'] as String,
@@ -17,5 +17,6 @@ abstract final class ProfileDto {
     elevationBand: ElevationBand.tryParse(row['elevation_band'] as String?),
     notifyWaterArrival: (row['notify_water_arrival'] as bool?) ?? true,
     notifyScheduleReminder: (row['notify_schedule_reminder'] as bool?) ?? true,
+    notifyScheduleStart: (row['notify_schedule_start'] as bool?) ?? true,
   );
 }

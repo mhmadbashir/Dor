@@ -5,7 +5,7 @@ const row = (kind: OutboxRow["kind"], payload: Record<string, unknown> = {}): Ou
   id: 1,
   kind,
   neighborhood_id: "nb-1",
-  elevation_band: kind === "schedule_reminder" ? null : "high",
+  elevation_band: kind === "schedule_reminder" || kind === "schedule_start" ? null : "high",
   payload: { name_ar: "خلدا", name_en: "Khalda", ...payload },
 });
 
@@ -28,6 +28,15 @@ Deno.test("reached-lower message explains the elevation delay", () => {
   assertEquals(m.title, "Water reached Khalda");
   assertEquals(m.body.includes("higher ground"), true);
   assertEquals(m.data, { kind: "water_reached_lower", neighborhood_id: "nb-1", elevation_band: "high" });
+});
+
+Deno.test("water-day start reminder says it is per the schedule", () => {
+  const ar = buildMessage(row("schedule_start", { start_time: "08:00" }), "ar");
+  assertEquals(ar.title, "بدأ دور المياه في خلدا");
+  assertEquals(ar.body, "الضخ مجدول من الساعة 8:00 ص. سنخبرك عندما يؤكد جيرانك وصول المياه.");
+  const en = buildMessage(row("schedule_start", { start_time: "18:00" }), "en");
+  assertEquals(en.title, "Your water day in Khalda starts now");
+  assertEquals(en.body.startsWith("Supply is scheduled from 6:00 PM."), true);
 });
 
 Deno.test("reminder includes the localized start time", () => {
