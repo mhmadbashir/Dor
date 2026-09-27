@@ -1,3 +1,4 @@
+import '../../locations/domain/elevation_band.dart';
 import 'user_role.dart';
 
 class Profile {
@@ -8,6 +9,9 @@ class Profile {
     this.phone,
     this.neighborhoodId,
     this.locale = 'ar',
+    this.elevationBand,
+    this.notifyWaterArrival = true,
+    this.notifyScheduleReminder = true,
   });
 
   final String id;
@@ -16,6 +20,11 @@ class Profile {
   final String? phone;
   final String? neighborhoodId;
   final String locale;
+
+  /// Null when the user is not sure.
+  final ElevationBand? elevationBand;
+  final bool notifyWaterArrival;
+  final bool notifyScheduleReminder;
 
   bool get hasNeighborhood => neighborhoodId != null;
 
@@ -27,8 +36,21 @@ class Profile {
       other.fullName == fullName &&
       other.phone == phone &&
       other.neighborhoodId == neighborhoodId &&
-      other.locale == locale;
+      other.locale == locale &&
+      other.elevationBand == elevationBand &&
+      other.notifyWaterArrival == notifyWaterArrival &&
+      other.notifyScheduleReminder == notifyScheduleReminder;
 
   @override
-  int get hashCode => Object.hash(id, role, fullName, phone, neighborhoodId, locale);
+  int get hashCode => Object.hash(
+    id,
+    role,
+    fullName,
+    phone,
+    neighborhoodId,
+    locale,
+    elevationBand,
+    notifyWaterArrival,
+    notifyScheduleReminder,
+  );
 }

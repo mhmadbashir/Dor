@@ -38,7 +38,7 @@ void main() {
   });
 
   testWidgets('onboarding detects the neighborhood automatically', (tester) async {
-    when(() => device.currentPosition()).thenAnswer((_) async => inKhalda);
+    when(() => device.currentPosition()).thenAnswer((_) async => khaldaFix);
     when(() => locations.nearestNeighborhood(inKhalda)).thenAnswer((_) async => khaldaDetails);
 
     await tester.pumpScreen(
@@ -51,6 +51,7 @@ void main() {
     expect(find.textContaining('We found Khalda'), findsOneWidget);
     // The cascade is filled and the user can confirm.
     expect(find.text('Khalda'), findsOneWidget);
+    await tester.scrollUntilVisible(find.byKey(const Key('saveNeighborhoodButton')), 200);
     final save = tester.widget<FilledButton>(find.byKey(const Key('saveNeighborhoodButton')));
     expect(save.onPressed, isNotNull);
   });

@@ -6,6 +6,11 @@ import '../domain/location_entities.dart';
 import '../domain/locations_repository.dart';
 import 'location_dtos.dart';
 
+abstract final class LocationColumns {
+  static const neighborhood =
+      'id, area_id, name_ar, name_en, center_lat, center_lng, elevation_low_max_m, elevation_high_min_m';
+}
+
 class SupabaseLocationsRepository implements LocationsRepository {
   SupabaseLocationsRepository(this._client);
 
@@ -31,7 +36,7 @@ class SupabaseLocationsRepository implements LocationsRepository {
   Future<List<Neighborhood>> neighborhoods(String areaId) => guard(() async {
     final rows = await _client
         .from('neighborhoods')
-        .select('id, area_id, name_ar, name_en, center_lat, center_lng')
+        .select(LocationColumns.neighborhood)
         .eq('area_id', areaId)
         .eq('is_active', true)
         .order('name_en');
@@ -43,7 +48,7 @@ class SupabaseLocationsRepository implements LocationsRepository {
     final row = await _client
         .from('neighborhoods')
         .select(
-          'id, area_id, name_ar, name_en, center_lat, center_lng, '
+          '${LocationColumns.neighborhood}, '
           'area:areas(id, governorate_id, name_ar, name_en, '
           'governorate:governorates(id, name_ar, name_en))',
         )

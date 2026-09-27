@@ -20,6 +20,8 @@ abstract final class LocationDtos {
     name: _name(row),
     centerLat: (row['center_lat'] as num?)?.toDouble(),
     centerLng: (row['center_lng'] as num?)?.toDouble(),
+    elevationLowMaxM: (row['elevation_low_max_m'] as num?)?.toDouble(),
+    elevationHighMinM: (row['elevation_high_min_m'] as num?)?.toDouble(),
   );
 
   /// Parses `neighborhoods` joined as `*, area:areas(*, governorate:governorates(*))`.

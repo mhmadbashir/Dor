@@ -62,8 +62,7 @@ import 'app_localizations_en.dart';
 /// be consistent with the languages listed in the AppLocalizations.supportedLocales
 /// property.
 abstract class AppLocalizations {
-  AppLocalizations(String locale)
-    : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  AppLocalizations(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -71,8 +70,7 @@ abstract class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations)!;
   }
 
-  static const LocalizationsDelegate<AppLocalizations> delegate =
-      _AppLocalizationsDelegate();
+  static const LocalizationsDelegate<AppLocalizations> delegate = _AppLocalizationsDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -93,10 +91,7 @@ abstract class AppLocalizations {
       ];
 
   /// A list of this localizations delegate's supported locales.
-  static const List<Locale> supportedLocales = <Locale>[
-    Locale('ar'),
-    Locale('en'),
-  ];
+  static const List<Locale> supportedLocales = <Locale>[Locale('ar'), Locale('en')];
 
   /// No description provided for @appTitle.
   ///
@@ -451,10 +446,255 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Driver tools will appear here once your account is approved.'**
   String get driverHomeBody;
+
+  /// No description provided for @pushWaterArrivedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Water arrived in {neighborhood}'**
+  String pushWaterArrivedTitle(String neighborhood);
+
+  /// No description provided for @pushWaterArrivedBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Neighbors at your level confirmed water is flowing. Time to fill your tanks.'**
+  String get pushWaterArrivedBody;
+
+  /// No description provided for @pushReachedLowerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Water reached {neighborhood}'**
+  String pushReachedLowerTitle(String neighborhood);
+
+  /// No description provided for @pushReachedLowerBody.
+  ///
+  /// In en, this message translates to:
+  /// **'It\'s flowing in the lower parts of the neighborhood. Homes on higher ground usually get it later.'**
+  String get pushReachedLowerBody;
+
+  /// No description provided for @pushReminderTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Water day tomorrow in {neighborhood}'**
+  String pushReminderTitle(String neighborhood);
+
+  /// No description provided for @pushReminderBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Supply is scheduled to start at {time}. Get your tanks ready.'**
+  String pushReminderBody(String time);
+
+  /// No description provided for @elevationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Where is your home in the neighborhood?'**
+  String get elevationTitle;
+
+  /// No description provided for @elevationSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Water reaches low-lying homes first and homes on hills last, so we match you with neighbors at your level.'**
+  String get elevationSubtitle;
+
+  /// No description provided for @elevationLow.
+  ///
+  /// In en, this message translates to:
+  /// **'Low ground'**
+  String get elevationLow;
+
+  /// No description provided for @elevationMiddle.
+  ///
+  /// In en, this message translates to:
+  /// **'Middle'**
+  String get elevationMiddle;
+
+  /// No description provided for @elevationHigh.
+  ///
+  /// In en, this message translates to:
+  /// **'On a hill'**
+  String get elevationHigh;
+
+  /// No description provided for @elevationNotSure.
+  ///
+  /// In en, this message translates to:
+  /// **'Not sure'**
+  String get elevationNotSure;
+
+  /// No description provided for @elevationSuggested.
+  ///
+  /// In en, this message translates to:
+  /// **'Suggested from your location\'s altitude. Change it if it\'s not right.'**
+  String get elevationSuggested;
+
+  /// No description provided for @settingsHome.
+  ///
+  /// In en, this message translates to:
+  /// **'My home'**
+  String get settingsHome;
+
+  /// No description provided for @liveTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Water right now'**
+  String get liveTitle;
+
+  /// No description provided for @liveFlowing.
+  ///
+  /// In en, this message translates to:
+  /// **'Water is flowing'**
+  String get liveFlowing;
+
+  /// No description provided for @liveFlowingDetail.
+  ///
+  /// In en, this message translates to:
+  /// **'Since {time} · {count, plural, =1{1 confirmation} other{{count} confirmations}}'**
+  String liveFlowingDetail(String time, int count);
+
+  /// No description provided for @liveFlowingBelow.
+  ///
+  /// In en, this message translates to:
+  /// **'Water reached lower homes'**
+  String get liveFlowingBelow;
+
+  /// No description provided for @liveFlowingBelowDetail.
+  ///
+  /// In en, this message translates to:
+  /// **'Flowing lower down since {time}. Homes on higher ground usually get it later.'**
+  String liveFlowingBelowDetail(String time);
+
+  /// No description provided for @liveNoWater.
+  ///
+  /// In en, this message translates to:
+  /// **'No water yet'**
+  String get liveNoWater;
+
+  /// No description provided for @liveNoWaterDetail.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 neighbor at your level reported no water} other{{count} neighbors at your level reported no water}}'**
+  String liveNoWaterDetail(int count);
+
+  /// No description provided for @liveUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'No confirmations yet'**
+  String get liveUnknown;
+
+  /// No description provided for @liveUnknownDetail.
+  ///
+  /// In en, this message translates to:
+  /// **'Let your neighbors know when water arrives.'**
+  String get liveUnknownDetail;
+
+  /// No description provided for @liveYourLevel.
+  ///
+  /// In en, this message translates to:
+  /// **'Your home'**
+  String get liveYourLevel;
+
+  /// No description provided for @bandFlowing.
+  ///
+  /// In en, this message translates to:
+  /// **'Flowing'**
+  String get bandFlowing;
+
+  /// No description provided for @bandNoWater.
+  ///
+  /// In en, this message translates to:
+  /// **'No water'**
+  String get bandNoWater;
+
+  /// No description provided for @bandUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'No reports'**
+  String get bandUnknown;
+
+  /// No description provided for @reportArrived.
+  ///
+  /// In en, this message translates to:
+  /// **'Water arrived'**
+  String get reportArrived;
+
+  /// No description provided for @reportNoWater.
+  ///
+  /// In en, this message translates to:
+  /// **'No water'**
+  String get reportNoWater;
+
+  /// No description provided for @reportThanks.
+  ///
+  /// In en, this message translates to:
+  /// **'Thanks for letting your neighbors know!'**
+  String get reportThanks;
+
+  /// No description provided for @reportedArrivedAt.
+  ///
+  /// In en, this message translates to:
+  /// **'You reported water arrived at {time}.'**
+  String reportedArrivedAt(String time);
+
+  /// No description provided for @reportedNoWaterAt.
+  ///
+  /// In en, this message translates to:
+  /// **'You reported no water at {time}.'**
+  String reportedNoWaterAt(String time);
+
+  /// No description provided for @reportNextAllowed.
+  ///
+  /// In en, this message translates to:
+  /// **'You can report again at {time}.'**
+  String reportNextAllowed(String time);
+
+  /// No description provided for @notificationChannelName.
+  ///
+  /// In en, this message translates to:
+  /// **'Water alerts'**
+  String get notificationChannelName;
+
+  /// No description provided for @notificationChannelDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'When water arrives in your neighborhood and reminders before your water day.'**
+  String get notificationChannelDescription;
+
+  /// No description provided for @settingsNotifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get settingsNotifications;
+
+  /// No description provided for @settingsNotifyArrival.
+  ///
+  /// In en, this message translates to:
+  /// **'Water arrival alerts'**
+  String get settingsNotifyArrival;
+
+  /// No description provided for @settingsNotifyArrivalSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'When neighbors at your level confirm water is flowing.'**
+  String get settingsNotifyArrivalSubtitle;
+
+  /// No description provided for @settingsNotifyReminder.
+  ///
+  /// In en, this message translates to:
+  /// **'Water day reminder'**
+  String get settingsNotifyReminder;
+
+  /// No description provided for @settingsNotifyReminderSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'The evening before your scheduled water day.'**
+  String get settingsNotifyReminderSubtitle;
+
+  /// No description provided for @bandReports.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 report} other{{count} reports}}'**
+  String bandReports(int count);
 }
 
-class _AppLocalizationsDelegate
-    extends LocalizationsDelegate<AppLocalizations> {
+class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
   const _AppLocalizationsDelegate();
 
   @override
@@ -463,8 +703,7 @@ class _AppLocalizationsDelegate
   }
 
   @override
-  bool isSupported(Locale locale) =>
-      <String>['ar', 'en'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['ar', 'en'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;

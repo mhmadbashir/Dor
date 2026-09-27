@@ -3,10 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'core/config/env.dart';
+import 'core/l10n/digits.dart';
 
 /// Initializes services, then runs [app] inside a [ProviderScope].
 Future<void> bootstrap(Widget app) async {
   WidgetsFlutterBinding.ensureInitialized();
+  useWesternDigits();
 
   if (!Env.isConfigured) {
     runApp(const _MissingConfigApp());

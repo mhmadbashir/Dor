@@ -5,7 +5,10 @@ import 'package:go_router/go_router.dart';
 import '../../../core/l10n/l10n.dart';
 import '../../../core/router/routes.dart';
 import '../../auth/presentation/auth_providers.dart';
+import '../../crowd_reports/presentation/elevation_labels.dart';
 import '../../locations/presentation/locations_providers.dart';
+import '../../notifications/presentation/notification_prefs_controller.dart';
+import '../../notifications/presentation/push_controller.dart';
 import 'locale_controller.dart';
 
 class SettingsScreen extends ConsumerWidget {
@@ -15,7 +18,8 @@ class SettingsScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     final locale = ref.watch(localeControllerProvider);
-    final neighborhoodId = ref.watch(myProfileProvider).value?.neighborhoodId;
+    final profile = ref.watch(myProfileProvider).value;
+    final neighborhoodId = profile?.neighborhoodId;
     final neighborhoodName = neighborhoodId == null
         ? null
         : ref
@@ -24,6 +28,9 @@ class SettingsScreen extends ConsumerWidget {
               ?.neighborhood
               .name
               .resolve(locale.languageCode);
+    final homeSummary = neighborhoodName == null
+        ? null
+        : '$neighborhoodName · ${l10n.elevationLabel(profile?.elevationBand)}';
 
     return Scaffold(
       appBar: AppBar(title: Text(l10n.settingsTitle)),
@@ -31,8 +38,8 @@ class SettingsScreen extends ConsumerWidget {
         children: [
           ListTile(
             leading: const Icon(Icons.home_outlined),
-            title: Text(l10n.settingsNeighborhood),
-            subtitle: neighborhoodName == null ? null : Text(neighborhoodName),
+            title: Text(l10n.settingsHome),
+            subtitle: homeSummary == null ? null : Text(homeSummary),
             trailing: const Icon(Icons.chevron_right),
             onTap: () => context.push(Routes.settingsNeighborhood),
           ),
@@ -48,6 +55,31 @@ class SettingsScreen extends ConsumerWidget {
               onSelectionChanged: (s) =>
                   ref.read(localeControllerProvider.notifier).setLanguage(s.single),
             ),
+          ),
+          const Divider(),
+          Padding(
+            padding: const EdgeInsetsDirectional.fromSTEB(16, 8, 16, 0),
+            child: Text(l10n.settingsNotifications, style: Theme.of(context).textTheme.titleSmall),
+          ),
+          SwitchListTile(
+            key: const Key('notifyArrivalSwitch'),
+            secondary: const Icon(Icons.water_drop_outlined),
+            title: Text(l10n.settingsNotifyArrival),
+            subtitle: Text(l10n.settingsNotifyArrivalSubtitle),
+            value: profile?.notifyWaterArrival ?? true,
+            onChanged: profile == null
+                ? null
+                : ref.read(notificationPrefsControllerProvider.notifier).setWaterArrival,
+          ),
+          SwitchListTile(
+            key: const Key('notifyReminderSwitch'),
+            secondary: const Icon(Icons.event_outlined),
+            title: Text(l10n.settingsNotifyReminder),
+            subtitle: Text(l10n.settingsNotifyReminderSubtitle),
+            value: profile?.notifyScheduleReminder ?? true,
+            onChanged: profile == null
+                ? null
+                : ref.read(notificationPrefsControllerProvider.notifier).setScheduleReminder,
           ),
           const Divider(),
           const SignOutTile(),
@@ -71,7 +103,7 @@ class SignOutTile extends ConsumerWidget {
       // The router redirects to sign-in once the session ends.
       onTap: () async {
         try {
-          await ref.read(authRepositoryProvider).signOut();
+          await ref.read(pushControllerProvider.notifier).signOut();
         } catch (e) {
           if (context.mounted) {
             ScaffoldMessenger.of(context)

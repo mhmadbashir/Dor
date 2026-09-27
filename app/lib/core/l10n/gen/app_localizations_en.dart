@@ -51,26 +51,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get authChangeNumber => 'Change number';
 
   @override
-  String get errorInvalidPhone =>
-      'Enter a valid Jordanian mobile number (077, 078 or 079).';
+  String get errorInvalidPhone => 'Enter a valid Jordanian mobile number (077, 078 or 079).';
 
   @override
   String get errorInvalidOtp => 'The code is incorrect or has expired.';
 
   @override
-  String get errorNetwork =>
-      'No connection. Check your internet and try again.';
+  String get errorNetwork => 'No connection. Check your internet and try again.';
 
   @override
-  String get errorRateLimited =>
-      'Too many attempts. Please wait a moment and try again.';
+  String get errorRateLimited => 'Too many attempts. Please wait a moment and try again.';
 
   @override
   String get errorForbidden => 'You don\'t have permission to do that.';
 
   @override
-  String get errorSessionExpired =>
-      'Your session has expired. Please sign in again.';
+  String get errorSessionExpired => 'Your session has expired. Please sign in again.';
 
   @override
   String get errorUnknown => 'Something went wrong. Please try again.';
@@ -82,8 +78,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get onboardingTitle => 'Where do you live?';
 
   @override
-  String get onboardingSubtitle =>
-      'We\'ll show you your neighborhood\'s water schedule.';
+  String get onboardingSubtitle => 'We\'ll show you your neighborhood\'s water schedule.';
 
   @override
   String get governorateLabel => 'Governorate';
@@ -189,8 +184,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get scheduleNone =>
-      'No water schedule has been published for your neighborhood yet.';
+  String get scheduleNone => 'No water schedule has been published for your neighborhood yet.';
 
   @override
   String get scheduleDisclaimer =>
@@ -221,6 +215,174 @@ class AppLocalizationsEn extends AppLocalizations {
   String get driverHomeTitle => 'Driver mode';
 
   @override
-  String get driverHomeBody =>
-      'Driver tools will appear here once your account is approved.';
+  String get driverHomeBody => 'Driver tools will appear here once your account is approved.';
+
+  @override
+  String pushWaterArrivedTitle(String neighborhood) {
+    return 'Water arrived in $neighborhood';
+  }
+
+  @override
+  String get pushWaterArrivedBody =>
+      'Neighbors at your level confirmed water is flowing. Time to fill your tanks.';
+
+  @override
+  String pushReachedLowerTitle(String neighborhood) {
+    return 'Water reached $neighborhood';
+  }
+
+  @override
+  String get pushReachedLowerBody =>
+      'It\'s flowing in the lower parts of the neighborhood. Homes on higher ground usually get it later.';
+
+  @override
+  String pushReminderTitle(String neighborhood) {
+    return 'Water day tomorrow in $neighborhood';
+  }
+
+  @override
+  String pushReminderBody(String time) {
+    return 'Supply is scheduled to start at $time. Get your tanks ready.';
+  }
+
+  @override
+  String get elevationTitle => 'Where is your home in the neighborhood?';
+
+  @override
+  String get elevationSubtitle =>
+      'Water reaches low-lying homes first and homes on hills last, so we match you with neighbors at your level.';
+
+  @override
+  String get elevationLow => 'Low ground';
+
+  @override
+  String get elevationMiddle => 'Middle';
+
+  @override
+  String get elevationHigh => 'On a hill';
+
+  @override
+  String get elevationNotSure => 'Not sure';
+
+  @override
+  String get elevationSuggested =>
+      'Suggested from your location\'s altitude. Change it if it\'s not right.';
+
+  @override
+  String get settingsHome => 'My home';
+
+  @override
+  String get liveTitle => 'Water right now';
+
+  @override
+  String get liveFlowing => 'Water is flowing';
+
+  @override
+  String liveFlowingDetail(String time, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count confirmations',
+      one: '1 confirmation',
+    );
+    return 'Since $time · $_temp0';
+  }
+
+  @override
+  String get liveFlowingBelow => 'Water reached lower homes';
+
+  @override
+  String liveFlowingBelowDetail(String time) {
+    return 'Flowing lower down since $time. Homes on higher ground usually get it later.';
+  }
+
+  @override
+  String get liveNoWater => 'No water yet';
+
+  @override
+  String liveNoWaterDetail(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count neighbors at your level reported no water',
+      one: '1 neighbor at your level reported no water',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get liveUnknown => 'No confirmations yet';
+
+  @override
+  String get liveUnknownDetail => 'Let your neighbors know when water arrives.';
+
+  @override
+  String get liveYourLevel => 'Your home';
+
+  @override
+  String get bandFlowing => 'Flowing';
+
+  @override
+  String get bandNoWater => 'No water';
+
+  @override
+  String get bandUnknown => 'No reports';
+
+  @override
+  String get reportArrived => 'Water arrived';
+
+  @override
+  String get reportNoWater => 'No water';
+
+  @override
+  String get reportThanks => 'Thanks for letting your neighbors know!';
+
+  @override
+  String reportedArrivedAt(String time) {
+    return 'You reported water arrived at $time.';
+  }
+
+  @override
+  String reportedNoWaterAt(String time) {
+    return 'You reported no water at $time.';
+  }
+
+  @override
+  String reportNextAllowed(String time) {
+    return 'You can report again at $time.';
+  }
+
+  @override
+  String get notificationChannelName => 'Water alerts';
+
+  @override
+  String get notificationChannelDescription =>
+      'When water arrives in your neighborhood and reminders before your water day.';
+
+  @override
+  String get settingsNotifications => 'Notifications';
+
+  @override
+  String get settingsNotifyArrival => 'Water arrival alerts';
+
+  @override
+  String get settingsNotifyArrivalSubtitle =>
+      'When neighbors at your level confirm water is flowing.';
+
+  @override
+  String get settingsNotifyReminder => 'Water day reminder';
+
+  @override
+  String get settingsNotifyReminderSubtitle => 'The evening before your scheduled water day.';
+
+  @override
+  String bandReports(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count reports',
+      one: '1 report',
+    );
+    return '$_temp0';
+  }
 }

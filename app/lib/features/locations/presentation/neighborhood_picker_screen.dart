@@ -4,6 +4,8 @@ import 'package:go_router/go_router.dart';
 
 import '../../../core/l10n/l10n.dart';
 import '../../../core/widgets/async_value_view.dart';
+import '../../crowd_reports/presentation/elevation_labels.dart';
+import '../domain/elevation_band.dart';
 import '../domain/localized_name.dart';
 import 'locations_providers.dart';
 import 'neighborhood_picker_controller.dart';
@@ -54,7 +56,7 @@ class _NeighborhoodPickerScreenState extends ConsumerState<NeighborhoodPickerScr
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: !widget.isOnboarding,
-        title: Text(widget.isOnboarding ? l10n.appTitle : l10n.settingsNeighborhood),
+        title: Text(widget.isOnboarding ? l10n.appTitle : l10n.settingsHome),
       ),
       body: SafeArea(
         child: AsyncValueView(
@@ -125,6 +127,8 @@ class _NeighborhoodPickerScreenState extends ConsumerState<NeighborhoodPickerScr
                     onChanged: controller.selectNeighborhood,
                     onRetry: () => ref.invalidate(neighborhoodsProvider(areaId)),
                   ),
+                const SizedBox(height: 24),
+                _ElevationSection(selection: selection, enabled: enabled),
                 const SizedBox(height: 24),
                 if (selection.saveError case final error?)
                   Padding(
@@ -266,6 +270,64 @@ class _InfoCard extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+/// "Where is your home in the neighborhood?" low / middle / high / not sure.
+class _ElevationSection extends ConsumerWidget {
+  const _ElevationSection({required this.selection, required this.enabled});
+
+  final NeighborhoodPickerState selection;
+  final bool enabled;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = context.l10n;
+    final theme = Theme.of(context);
+    final controller = ref.read(neighborhoodPickerControllerProvider.notifier);
+    const options = <ElevationBand?>[
+      ElevationBand.low,
+      ElevationBand.middle,
+      ElevationBand.high,
+      null,
+    ];
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(l10n.elevationTitle, style: theme.textTheme.titleMedium),
+        const SizedBox(height: 4),
+        Text(l10n.elevationSubtitle, style: theme.textTheme.bodySmall),
+        const SizedBox(height: 12),
+        Wrap(
+          spacing: 8,
+          runSpacing: 8,
+          children: [
+            for (final band in options)
+              ChoiceChip(
+                key: Key('elevation-${band?.name ?? 'notSure'}'),
+                avatar: Icon(switch (band) {
+                  ElevationBand.low => Icons.water_outlined,
+                  ElevationBand.middle => Icons.home_outlined,
+                  ElevationBand.high => Icons.landscape_outlined,
+                  null => Icons.help_outline,
+                }),
+                label: Text(l10n.elevationLabel(band)),
+                selected: selection.elevationBand == band,
+                onSelected: enabled ? (_) => controller.selectElevation(band) : null,
+              ),
+          ],
+        ),
+        if (selection.elevationSuggested && selection.elevationBand != null) ...[
+          const SizedBox(height: 8),
+          Text(
+            l10n.elevationSuggested,
+            key: const Key('elevationSuggested'),
+            style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.primary),
+          ),
+        ],
+      ],
     );
   }
 }

@@ -15,7 +15,7 @@ class GeolocatorLocationService implements DeviceLocationService {
   );
 
   @override
-  Future<GeoPoint> currentPosition() async {
+  Future<DeviceFix> currentPosition() async {
     if (!await Geolocator.isLocationServiceEnabled()) {
       throw const LocationException(LocationIssue.serviceDisabled);
     }
@@ -35,7 +35,7 @@ class GeolocatorLocationService implements DeviceLocationService {
 
     try {
       final position = await Geolocator.getCurrentPosition(locationSettings: _settings);
-      return GeoPoint(position.latitude, position.longitude);
+      return _fix(position);
     } on LocationServiceDisabledException catch (e) {
       throw LocationException(LocationIssue.serviceDisabled, e);
     } on PermissionDeniedException catch (e) {
@@ -49,11 +49,17 @@ class GeolocatorLocationService implements DeviceLocationService {
     }
   }
 
-  Future<GeoPoint?> _lastKnown() async {
+  static DeviceFix _fix(Position p) => DeviceFix(
+    GeoPoint(p.latitude, p.longitude),
+    altitudeM: p.altitude,
+    altitudeAccuracyM: p.altitudeAccuracy,
+  );
+
+  Future<DeviceFix?> _lastKnown() async {
     if (kIsWeb) return null; // not supported by browsers
     try {
       final p = await Geolocator.getLastKnownPosition();
-      return p == null ? null : GeoPoint(p.latitude, p.longitude);
+      return p == null ? null : _fix(p);
     } catch (_) {
       return null;
     }

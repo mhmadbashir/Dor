@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:dor/features/auth/presentation/auth_providers.dart';
 import 'package:dor/features/locations/domain/device_location.dart';
+import 'package:dor/features/locations/domain/elevation_band.dart';
 import 'package:dor/features/locations/presentation/locations_providers.dart';
 import 'package:dor/features/locations/presentation/neighborhood_picker_controller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -100,12 +101,12 @@ void main() {
       ..selectArea(tlaaAlAliArea.id)
       ..selectNeighborhood(khalda.id);
 
-    when(() => profiles.updateNeighborhood(userId, khalda.id)).thenAnswer((_) async {});
+    when(() => profiles.updateHome(userId, khalda.id, null)).thenAnswer((_) async {});
     when(() => profiles.fetchProfile(userId))
         .thenAnswer((_) async => householdProfile(neighborhoodId: khalda.id));
 
     expect(await notifier.save(), isTrue);
-    verify(() => profiles.updateNeighborhood(userId, khalda.id)).called(1);
+    verify(() => profiles.updateHome(userId, khalda.id, null)).called(1);
     expect((await container.read(myProfileProvider.future))!.neighborhoodId, khalda.id);
   });
 
@@ -116,7 +117,7 @@ void main() {
     notifier
       ..selectArea(tlaaAlAliArea.id)
       ..selectNeighborhood(khalda.id);
-    when(() => profiles.updateNeighborhood(any(), any())).thenThrow(Exception('offline'));
+    when(() => profiles.updateHome(any(), any(), any())).thenThrow(Exception('offline'));
 
     expect(await notifier.save(), isFalse);
     final state = container.read(neighborhoodPickerControllerProvider).value!;
@@ -136,7 +137,7 @@ void main() {
         c.read(neighborhoodPickerControllerProvider).value!;
 
     test('fills the whole cascade from the detected neighborhood', () async {
-      when(() => device.currentPosition()).thenAnswer((_) async => inKhalda);
+      when(() => device.currentPosition()).thenAnswer((_) async => khaldaFix);
       when(() => locations.nearestNeighborhood(inKhalda)).thenAnswer((_) async => khaldaDetails);
       final (container, notifier) = await ready();
 
@@ -155,7 +156,7 @@ void main() {
     });
 
     test('a manual choice made while locating wins over a late result', () async {
-      final position = Completer<GeoPoint>();
+      final position = Completer<DeviceFix>();
       when(() => device.currentPosition()).thenAnswer((_) => position.future);
       when(() => locations.nearestNeighborhood(any())).thenAnswer((_) async => khaldaDetails);
       final (container, notifier) = await ready();
@@ -167,7 +168,7 @@ void main() {
       expect(stateOf(container).isLocating, isFalse);
       expect(stateOf(container).canSave, isTrue);
 
-      position.complete(inKhalda); // e.g. the permission prompt answered late
+      position.complete(khaldaFix); // e.g. the permission prompt answered late
       await pending;
 
       expect(stateOf(container).neighborhoodId, tlaaAlAli.id);
@@ -176,7 +177,7 @@ void main() {
     });
 
     test('a manual change clears the detected label', () async {
-      when(() => device.currentPosition()).thenAnswer((_) async => inKhalda);
+      when(() => device.currentPosition()).thenAnswer((_) async => khaldaFix);
       when(() => locations.nearestNeighborhood(inKhalda)).thenAnswer((_) async => khaldaDetails);
       final (container, notifier) = await ready();
       await notifier.useCurrentLocation();
@@ -209,7 +210,8 @@ void main() {
     }
 
     test('reports when no served neighborhood is nearby', () async {
-      when(() => device.currentPosition()).thenAnswer((_) async => const GeoPoint(29.53, 35.0));
+      when(() => device.currentPosition())
+          .thenAnswer((_) async => const DeviceFix(GeoPoint(29.53, 35.0)));
       when(() => locations.nearestNeighborhood(any())).thenAnswer((_) async => null);
       final (container, notifier) = await ready();
 
@@ -220,7 +222,7 @@ void main() {
     });
 
     test('reports lookup failures', () async {
-      when(() => device.currentPosition()).thenAnswer((_) async => inKhalda);
+      when(() => device.currentPosition()).thenAnswer((_) async => khaldaFix);
       when(() => locations.nearestNeighborhood(any())).thenThrow(Exception('offline'));
       final (container, notifier) = await ready();
 
@@ -239,6 +241,71 @@ void main() {
       await notifier.openLocationSettings();
 
       verify(() => device.openSettingsFor(LocationIssue.serviceDisabled)).called(1);
+    });
+  });
+
+  group('home elevation', () {
+    Future<(ProviderContainer, NeighborhoodPickerController)> ready({
+      ElevationBand? profileBand,
+    }) async {
+      if (profileBand != null) {
+        when(() => locations.neighborhoodDetails(khalda.id)).thenAnswer((_) async => khaldaDetails);
+      }
+      final container = makeContainer(currentNeighborhood: profileBand == null ? null : khalda.id);
+      if (profileBand != null) {
+        when(
+          () => profiles.fetchProfile(userId),
+        ).thenAnswer((_) async => householdProfile(neighborhoodId: khalda.id, band: profileBand));
+        container.invalidate(myProfileProvider);
+      }
+      await container.read(neighborhoodPickerControllerProvider.future);
+      return (container, container.read(neighborhoodPickerControllerProvider.notifier));
+    }
+
+    NeighborhoodPickerState stateOf(ProviderContainer c) =>
+        c.read(neighborhoodPickerControllerProvider).value!;
+
+    test('GPS altitude suggests the elevation, and it is saved with the home', () async {
+      when(
+        () => device.currentPosition(),
+      ).thenAnswer((_) async => const DeviceFix(inKhalda, altitudeM: 1034, altitudeAccuracyM: 8));
+      when(() => locations.nearestNeighborhood(inKhalda)).thenAnswer((_) async => khaldaDetails);
+      when(() => profiles.updateHome(any(), any(), any())).thenAnswer((_) async {});
+      final (container, notifier) = await ready();
+
+      await notifier.useCurrentLocation();
+
+      expect(stateOf(container).elevationBand, ElevationBand.high);
+      expect(stateOf(container).elevationSuggested, isTrue);
+      expect(await notifier.save(), isTrue);
+      verify(() => profiles.updateHome(userId, khalda.id, ElevationBand.high)).called(1);
+    });
+
+    test("the user's own choice is never overridden by GPS", () async {
+      when(
+        () => device.currentPosition(),
+      ).thenAnswer((_) async => const DeviceFix(inKhalda, altitudeM: 1034, altitudeAccuracyM: 8));
+      when(() => locations.nearestNeighborhood(inKhalda)).thenAnswer((_) async => khaldaDetails);
+      final (container, notifier) = await ready();
+
+      notifier.selectElevation(ElevationBand.low);
+      await notifier.useCurrentLocation();
+
+      expect(stateOf(container).elevationBand, ElevationBand.low);
+      expect(stateOf(container).elevationSuggested, isFalse);
+    });
+
+    test('changing the neighborhood keeps the elevation choice', () async {
+      final (container, notifier) = await ready();
+      notifier
+        ..selectElevation(ElevationBand.high)
+        ..selectArea(markaArea.id);
+      expect(stateOf(container).elevationBand, ElevationBand.high);
+    });
+
+    test('editing starts from the saved elevation', () async {
+      final (container, _) = await ready(profileBand: ElevationBand.middle);
+      expect(stateOf(container).elevationBand, ElevationBand.middle);
     });
   });
 }

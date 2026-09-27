@@ -5,6 +5,10 @@ import 'package:dor/features/auth/domain/phone_number.dart';
 import 'package:dor/features/auth/domain/profile.dart';
 import 'package:dor/features/auth/domain/profile_repository.dart';
 import 'package:dor/features/auth/domain/user_role.dart';
+import 'package:dor/features/crowd_reports/domain/crowd_report.dart';
+import 'package:dor/features/crowd_reports/domain/crowd_reports_repository.dart';
+import 'package:dor/features/crowd_reports/domain/live_status.dart';
+import 'package:dor/features/locations/domain/elevation_band.dart';
 import 'package:dor/features/locations/domain/device_location.dart';
 import 'package:dor/features/locations/domain/localized_name.dart';
 import 'package:dor/features/locations/domain/location_entities.dart';
@@ -31,8 +35,14 @@ void registerFallbacks() {
 
 const userId = 'user-1';
 
-Profile householdProfile({String? neighborhoodId, String locale = 'ar'}) =>
-    Profile(id: userId, role: UserRole.household, neighborhoodId: neighborhoodId, locale: locale);
+Profile householdProfile({String? neighborhoodId, String locale = 'ar', ElevationBand? band}) =>
+    Profile(
+      id: userId,
+      role: UserRole.household,
+      neighborhoodId: neighborhoodId,
+      locale: locale,
+      elevationBand: band,
+    );
 
 const amman = Governorate(
   id: 'gov-amman',
@@ -56,6 +66,8 @@ const khalda = Neighborhood(
   id: 'nb-khalda',
   areaId: 'area-tlaa',
   name: LocalizedName(ar: 'خلدا', en: 'Khalda'),
+  elevationLowMaxM: 960,
+  elevationHighMinM: 1020,
 );
 const tlaaAlAli = Neighborhood(
   id: 'nb-tlaa',
@@ -89,3 +101,43 @@ MockAuthRepository signedInAuth([String? id = userId]) {
 
 /// A point a few hundred meters from Khalda's center.
 const inKhalda = GeoPoint(31.9975, 35.8370);
+const khaldaFix = DeviceFix(inKhalda);
+
+/// In-memory crowd reports backend with a controllable live status stream.
+class FakeCrowdReportsRepository implements CrowdReportsRepository {
+  FakeCrowdReportsRepository({this.latest, this.limit = const Duration(hours: 6)});
+
+  final _status = StreamController<NeighborhoodLiveStatus>.broadcast();
+  CrowdReport? latest;
+  final Duration limit;
+  DateTime Function() now = DateTime.now;
+  Object? submitError;
+  final submitted = <ReportKind>[];
+
+  var _current = NeighborhoodLiveStatus(const []);
+
+  void emit(List<BandStatus> bands) => _status.add(_current = NeighborhoodLiveStatus(bands));
+
+  @override
+  Stream<NeighborhoodLiveStatus> watchStatus(String neighborhoodId) async* {
+    // Like Supabase: the current snapshot first, then changes.
+    yield _current;
+    yield* _status.stream;
+  }
+
+  @override
+  Future<CrowdReport?> myLatestReport(String neighborhoodId) async => latest;
+
+  @override
+  Future<Duration> rateLimit() async => limit;
+
+  @override
+  Future<CrowdReport> submit(String neighborhoodId, ReportKind kind) async {
+    if (submitError case final e?) throw e;
+    submitted.add(kind);
+    return latest = CrowdReport(id: 'r${submitted.length}', kind: kind, createdAt: now());
+  }
+}
+
+BandStatus flowing(ElevationBand band, DateTime since, int count) =>
+    BandStatus(band: band, status: WaterStatus.flowing, flowingSince: since, arrivedCount: count);

@@ -106,5 +106,126 @@
   "languageEnglish": "English",
   "signOut": "Sign out",
   "driverHomeTitle": "Driver mode",
-  "driverHomeBody": "Driver tools will appear here once your account is approved."
+  "driverHomeBody": "Driver tools will appear here once your account is approved.",
+  "pushWaterArrivedTitle": "Water arrived in {neighborhood}",
+  "@pushWaterArrivedTitle": {
+    "placeholders": {
+      "neighborhood": {
+        "type": "String"
+      }
+    }
+  },
+  "pushWaterArrivedBody": "Neighbors at your level confirmed water is flowing. Time to fill your tanks.",
+  "pushReachedLowerTitle": "Water reached {neighborhood}",
+  "@pushReachedLowerTitle": {
+    "placeholders": {
+      "neighborhood": {
+        "type": "String"
+      }
+    }
+  },
+  "pushReachedLowerBody": "It's flowing in the lower parts of the neighborhood. Homes on higher ground usually get it later.",
+  "pushReminderTitle": "Water day tomorrow in {neighborhood}",
+  "@pushReminderTitle": {
+    "placeholders": {
+      "neighborhood": {
+        "type": "String"
+      }
+    }
+  },
+  "pushReminderBody": "Supply is scheduled to start at {time}. Get your tanks ready.",
+  "@pushReminderBody": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "elevationTitle": "Where is your home in the neighborhood?",
+  "elevationSubtitle": "Water reaches low-lying homes first and homes on hills last, so we match you with neighbors at your level.",
+  "elevationLow": "Low ground",
+  "elevationMiddle": "Middle",
+  "elevationHigh": "On a hill",
+  "elevationNotSure": "Not sure",
+  "elevationSuggested": "Suggested from your location's altitude. Change it if it's not right.",
+  "settingsHome": "My home",
+  "liveTitle": "Water right now",
+  "liveFlowing": "Water is flowing",
+  "liveFlowingDetail": "Since {time} · {count, plural, =1{1 confirmation} other{{count} confirmations}}",
+  "@liveFlowingDetail": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "liveFlowingBelow": "Water reached lower homes",
+  "liveFlowingBelowDetail": "Flowing lower down since {time}. Homes on higher ground usually get it later.",
+  "@liveFlowingBelowDetail": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "liveNoWater": "No water yet",
+  "liveNoWaterDetail": "{count, plural, =1{1 neighbor at your level reported no water} other{{count} neighbors at your level reported no water}}",
+  "@liveNoWaterDetail": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "liveUnknown": "No confirmations yet",
+  "liveUnknownDetail": "Let your neighbors know when water arrives.",
+  "liveYourLevel": "Your home",
+  "bandFlowing": "Flowing",
+  "bandNoWater": "No water",
+  "bandUnknown": "No reports",
+  "reportArrived": "Water arrived",
+  "reportNoWater": "No water",
+  "reportThanks": "Thanks for letting your neighbors know!",
+  "reportedArrivedAt": "You reported water arrived at {time}.",
+  "@reportedArrivedAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "reportedNoWaterAt": "You reported no water at {time}.",
+  "@reportedNoWaterAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "reportNextAllowed": "You can report again at {time}.",
+  "@reportNextAllowed": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "notificationChannelName": "Water alerts",
+  "notificationChannelDescription": "When water arrives in your neighborhood and reminders before your water day.",
+  "settingsNotifications": "Notifications",
+  "settingsNotifyArrival": "Water arrival alerts",
+  "settingsNotifyArrivalSubtitle": "When neighbors at your level confirm water is flowing.",
+  "settingsNotifyReminder": "Water day reminder",
+  "settingsNotifyReminderSubtitle": "The evening before your scheduled water day.",
+  "bandReports": "{count, plural, =1{1 report} other{{count} reports}}",
+  "@bandReports": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
 }

@@ -1,5 +1,7 @@
 import 'package:intl/intl.dart';
 
+import '../../../core/time/amman_time.dart';
+
 /// Locale-aware labels for schedule values. Inputs are Amman wall-clock values.
 class ScheduleFormatters {
   ScheduleFormatters(this.locale);
@@ -18,6 +20,9 @@ class ScheduleFormatters {
   String weekday(DateTime wallClock) => DateFormat.EEEE(locale).format(wallClock);
 
   String time(DateTime wallClock) => DateFormat.jm(locale).format(wallClock);
+
+  /// Time of day in Amman for a real instant (e.g. a report timestamp).
+  String instantTime(DateTime instant) => time(AmmanTime.wallClock(instant));
 
   String dayAndTime(DateTime wallClock) => '${weekday(wallClock)} ${time(wallClock)}';
 }

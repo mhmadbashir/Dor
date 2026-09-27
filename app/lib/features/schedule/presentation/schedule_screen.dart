@@ -5,6 +5,8 @@ import 'package:go_router/go_router.dart';
 import '../../../core/l10n/l10n.dart';
 import '../../../core/router/routes.dart';
 import '../../../core/widgets/async_value_view.dart';
+import '../../auth/presentation/auth_providers.dart';
+import '../../crowd_reports/presentation/widgets/live_status_card.dart';
 import '../domain/water_outlook.dart';
 import 'schedule_formatters.dart';
 import 'schedule_providers.dart';
@@ -54,6 +56,11 @@ class ScheduleScreen extends ConsumerWidget {
                 child: ListView(
                   padding: const EdgeInsets.all(16),
                   children: [
+                    LiveStatusCard(
+                      neighborhoodId: data.data.details.neighborhood.id,
+                      homeBand: ref.watch(myProfileProvider).value?.elevationBand,
+                    ),
+                    const SizedBox(height: 16),
                     _OutlookCard(outlook: data.outlook),
                     const SizedBox(height: 24),
                     Text(l10n.scheduleWeekTitle, style: Theme.of(context).textTheme.titleMedium),

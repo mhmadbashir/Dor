@@ -13,6 +13,15 @@ class GeoPoint {
   int get hashCode => Object.hash(latitude, longitude);
 }
 
+/// A position fix, with altitude when the device provides one.
+class DeviceFix {
+  const DeviceFix(this.point, {this.altitudeM, this.altitudeAccuracyM});
+
+  final GeoPoint point;
+  final double? altitudeM;
+  final double? altitudeAccuracyM;
+}
+
 /// Why the device location could not be read.
 enum LocationIssue { serviceDisabled, permissionDenied, permissionDeniedForever, unavailable }
 
@@ -29,7 +38,7 @@ class LocationException implements Exception {
 /// Reads the device's current position, handling permission prompts.
 abstract interface class DeviceLocationService {
   /// Throws [LocationException] when the position can't be obtained.
-  Future<GeoPoint> currentPosition();
+  Future<DeviceFix> currentPosition();
 
   /// Whether [openSettingsFor] can do anything on this platform.
   bool get canOpenSettings;

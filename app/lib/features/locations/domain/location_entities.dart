@@ -22,6 +22,8 @@ class Neighborhood {
     required this.name,
     this.centerLat,
     this.centerLng,
+    this.elevationLowMaxM,
+    this.elevationHighMinM,
   });
 
   final String id;
@@ -29,6 +31,10 @@ class Neighborhood {
   final LocalizedName name;
   final double? centerLat;
   final double? centerLng;
+
+  /// Altitude thresholds (meters) used to suggest a home's elevation band.
+  final double? elevationLowMaxM;
+  final double? elevationHighMinM;
 }
 
 /// A neighborhood together with its parent area and governorate.

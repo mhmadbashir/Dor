@@ -4,7 +4,9 @@
 --
 --   Admin       +962790000900
 --   Drivers     +962790000101, +962790000102, +962790000103
---   Households  +962790000001 (Tla' Al-Ali), +962790000002 (Khalda), +962790000003 (Marka)
+--   Households  +962790000001 (Tla' Al-Ali, high), +962790000002 (Khalda, low),
+--               +962790000003 (Marka, middle),
+--               +962790000006 / 07 / 08 (Khalda: low / middle / high)
 --   OTP for all: 123456
 
 -- ---------------------------------------------------------------------------
@@ -26,6 +28,15 @@ insert into public.neighborhoods (id, area_id, name_ar, name_en, center_lat, cen
    'خلدا', 'Khalda', 31.9989, 35.8342),
   ('30000000-0000-0000-0000-000000000003', '20000000-0000-0000-0000-000000000002',
    'ماركا', 'Marka', 31.9853, 35.9786);
+
+-- Sample altitude thresholds (meters) used to suggest a home's elevation band
+-- from GPS. Placeholder values: replace with real ones from the admin dashboard.
+update public.neighborhoods set elevation_low_max_m = 930, elevation_high_min_m = 990
+  where id = '30000000-0000-0000-0000-000000000001';
+update public.neighborhoods set elevation_low_max_m = 960, elevation_high_min_m = 1020
+  where id = '30000000-0000-0000-0000-000000000002';
+update public.neighborhoods set elevation_low_max_m = 760, elevation_high_min_m = 820
+  where id = '30000000-0000-0000-0000-000000000003';
 
 -- Weekly schedules (ISO weekday: 1 = Monday ... 6 = Saturday, 7 = Sunday).
 insert into public.water_schedules (neighborhood_id, weekday, start_time, duration_hours, notes) values
@@ -67,6 +78,9 @@ select pg_temp.seed_user('40000000-0000-0000-0000-000000000103', '962790000103')
 select pg_temp.seed_user('40000000-0000-0000-0000-000000000001', '962790000001');
 select pg_temp.seed_user('40000000-0000-0000-0000-000000000002', '962790000002');
 select pg_temp.seed_user('40000000-0000-0000-0000-000000000003', '962790000003');
+select pg_temp.seed_user('40000000-0000-0000-0000-000000000006', '962790000006');
+select pg_temp.seed_user('40000000-0000-0000-0000-000000000007', '962790000007');
+select pg_temp.seed_user('40000000-0000-0000-0000-000000000008', '962790000008');
 
 -- Profiles are created by the on_auth_user_created trigger; fill in details.
 update public.profiles set role = 'admin', full_name = 'Dor Admin', locale = 'en'
@@ -80,10 +94,22 @@ update public.profiles set role = 'driver', full_name = v.name
   ) as v(id, name)
   where profiles.id = v.id;
 
-update public.profiles set full_name = v.name, neighborhood_id = v.neighborhood_id
+update public.profiles
+   set full_name = v.name, neighborhood_id = v.neighborhood_id, elevation_band = v.band::public.elevation_band
   from (values
-    ('40000000-0000-0000-0000-000000000001'::uuid, 'ليلى', '30000000-0000-0000-0000-000000000001'::uuid),
-    ('40000000-0000-0000-0000-000000000002'::uuid, 'Omar', '30000000-0000-0000-0000-000000000002'::uuid),
-    ('40000000-0000-0000-0000-000000000003'::uuid, 'رنا', '30000000-0000-0000-0000-000000000003'::uuid)
-  ) as v(id, name, neighborhood_id)
+    ('40000000-0000-0000-0000-000000000001'::uuid, 'ليلى', '30000000-0000-0000-0000-000000000001'::uuid, 'high'),
+    ('40000000-0000-0000-0000-000000000002'::uuid, 'Omar', '30000000-0000-0000-0000-000000000002'::uuid, 'low'),
+    ('40000000-0000-0000-0000-000000000003'::uuid, 'رنا', '30000000-0000-0000-0000-000000000003'::uuid, 'middle'),
+    ('40000000-0000-0000-0000-000000000006'::uuid, 'سعيد', '30000000-0000-0000-0000-000000000002'::uuid, 'low'),
+    ('40000000-0000-0000-0000-000000000007'::uuid, 'Huda', '30000000-0000-0000-0000-000000000002'::uuid, 'middle'),
+    ('40000000-0000-0000-0000-000000000008'::uuid, 'ياسر', '30000000-0000-0000-0000-000000000002'::uuid, 'high')
+  ) as v(id, name, neighborhood_id, band)
   where profiles.id = v.id;
+
+-- ---------------------------------------------------------------------------
+-- Local wiring for the send-notifications job (see 20260927000008). The
+-- database reaches the API gateway on the Docker network. Must match
+-- NOTIFY_CRON_SECRET in supabase/functions/.env.
+-- ---------------------------------------------------------------------------
+select vault.create_secret('http://supabase_kong_dor:8000', 'project_url');
+select vault.create_secret('local-notify-cron-secret', 'notify_cron_secret');

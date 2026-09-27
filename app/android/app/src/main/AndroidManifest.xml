@@ -3,10 +3,17 @@
          needed later for tanker delivery pins and live driver tracking. -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- Water arrival alerts and schedule reminders (Android 13+). -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <application
         android:label="دور"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        <!-- FCM notifications shown while the app is in the background use this channel
+             (created by the app on startup; see FirebasePushMessaging). -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="water_alerts" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
