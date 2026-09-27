@@ -51,7 +51,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get authChangeNumber => 'تغيير الرقم';
 
   @override
-  String get errorInvalidPhone => 'أدخل رقم هاتف أردنيًا صحيحًا (077 أو 078 أو 079).';
+  String get errorInvalidPhone =>
+      'أدخل رقم هاتف أردنيًا صحيحًا (077 أو 078 أو 079).';
 
   @override
   String get errorInvalidOtp => 'الرمز غير صحيح أو منتهي الصلاحية.';
@@ -60,7 +61,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get errorNetwork => 'لا يوجد اتصال. تحقق من الإنترنت وحاول مرة أخرى.';
 
   @override
-  String get errorRateLimited => 'محاولات كثيرة. انتظر قليلًا ثم حاول مرة أخرى.';
+  String get errorRateLimited =>
+      'محاولات كثيرة. انتظر قليلًا ثم حاول مرة أخرى.';
 
   @override
   String get errorForbidden => 'ليس لديك صلاحية للقيام بذلك.';
@@ -113,7 +115,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get locationOrChooseManually => 'أو اختر يدويًا';
 
   @override
-  String get locationServiceDisabled => 'خدمة الموقع متوقفة. شغّلها أو اختر حيّك من القائمة أدناه.';
+  String get locationServiceDisabled =>
+      'خدمة الموقع متوقفة. شغّلها أو اختر حيّك من القائمة أدناه.';
 
   @override
   String get locationPermissionDenied =>
@@ -124,10 +127,12 @@ class AppLocalizationsAr extends AppLocalizations {
       'الوصول إلى الموقع محظور لتطبيق دور. اسمح به من الإعدادات أو اختر حيّك أدناه.';
 
   @override
-  String get locationUnavailable => 'تعذّر تحديد موقعك. حاول مرة أخرى أو اختر حيّك أدناه.';
+  String get locationUnavailable =>
+      'تعذّر تحديد موقعك. حاول مرة أخرى أو اختر حيّك أدناه.';
 
   @override
-  String get locationOutsideCoverage => 'دور لا يغطي موقعك الحالي بعد. اختر حيّك من القائمة أدناه.';
+  String get locationOutsideCoverage =>
+      'دور لا يغطي موقعك الحالي بعد. اختر حيّك من القائمة أدناه.';
 
   @override
   String get locationOpenSettings => 'فتح الإعدادات';
@@ -190,7 +195,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get scheduleNone => 'لم يُنشر جدول دور المياه لحيّك بعد.';
 
   @override
-  String get scheduleDisclaimer => 'المواعيد صادرة عن شركة المياه وقد يختلف موعد الضخ الفعلي.';
+  String get scheduleDisclaimer =>
+      'المواعيد صادرة عن شركة المياه وقد يختلف موعد الضخ الفعلي.';
 
   @override
   String get today => 'اليوم';
@@ -267,7 +273,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get elevationNotSure => 'لست متأكدًا';
 
   @override
-  String get elevationSuggested => 'اقترحناه حسب ارتفاع موقعك. غيّره إن لم يكن صحيحًا.';
+  String get elevationSuggested =>
+      'اقترحناه حسب ارتفاع موقعك. غيّره إن لم يكن صحيحًا.';
 
   @override
   String get settingsHome => 'منزلي';
@@ -363,7 +370,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get notificationChannelName => 'تنبيهات المياه';
 
   @override
-  String get notificationChannelDescription => 'عند وصول المياه إلى حيّك وتذكير قبل يوم الدور.';
+  String get notificationChannelDescription =>
+      'عند وصول المياه إلى حيّك وتذكير قبل يوم الدور.';
 
   @override
   String get settingsNotifications => 'الإشعارات';
@@ -372,13 +380,15 @@ class AppLocalizationsAr extends AppLocalizations {
   String get settingsNotifyArrival => 'تنبيهات وصول المياه';
 
   @override
-  String get settingsNotifyArrivalSubtitle => 'عندما يؤكد جيرانك في نفس مستوى منزلك وصول المياه.';
+  String get settingsNotifyArrivalSubtitle =>
+      'عندما يؤكد جيرانك في نفس مستوى منزلك وصول المياه.';
 
   @override
   String get settingsNotifyReminder => 'تذكير بيوم الدور';
 
   @override
-  String get settingsNotifyReminderSubtitle => 'مساء اليوم الذي يسبق يوم الدور المجدول.';
+  String get settingsNotifyReminderSubtitle =>
+      'مساء اليوم الذي يسبق يوم الدور المجدول.';
 
   @override
   String bandReports(int count) {

@@ -51,22 +51,26 @@ class AppLocalizationsEn extends AppLocalizations {
   String get authChangeNumber => 'Change number';
 
   @override
-  String get errorInvalidPhone => 'Enter a valid Jordanian mobile number (077, 078 or 079).';
+  String get errorInvalidPhone =>
+      'Enter a valid Jordanian mobile number (077, 078 or 079).';
 
   @override
   String get errorInvalidOtp => 'The code is incorrect or has expired.';
 
   @override
-  String get errorNetwork => 'No connection. Check your internet and try again.';
+  String get errorNetwork =>
+      'No connection. Check your internet and try again.';
 
   @override
-  String get errorRateLimited => 'Too many attempts. Please wait a moment and try again.';
+  String get errorRateLimited =>
+      'Too many attempts. Please wait a moment and try again.';
 
   @override
   String get errorForbidden => 'You don\'t have permission to do that.';
 
   @override
-  String get errorSessionExpired => 'Your session has expired. Please sign in again.';
+  String get errorSessionExpired =>
+      'Your session has expired. Please sign in again.';
 
   @override
   String get errorUnknown => 'Something went wrong. Please try again.';
@@ -78,7 +82,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get onboardingTitle => 'Where do you live?';
 
   @override
-  String get onboardingSubtitle => 'We\'ll show you your neighborhood\'s water schedule.';
+  String get onboardingSubtitle =>
+      'We\'ll show you your neighborhood\'s water schedule.';
 
   @override
   String get governorateLabel => 'Governorate';
@@ -184,7 +189,8 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get scheduleNone => 'No water schedule has been published for your neighborhood yet.';
+  String get scheduleNone =>
+      'No water schedule has been published for your neighborhood yet.';
 
   @override
   String get scheduleDisclaimer =>
@@ -215,7 +221,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get driverHomeTitle => 'Driver mode';
 
   @override
-  String get driverHomeBody => 'Driver tools will appear here once your account is approved.';
+  String get driverHomeBody =>
+      'Driver tools will appear here once your account is approved.';
 
   @override
   String pushWaterArrivedTitle(String neighborhood) {
@@ -373,7 +380,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsNotifyReminder => 'Water day reminder';
 
   @override
-  String get settingsNotifyReminderSubtitle => 'The evening before your scheduled water day.';
+  String get settingsNotifyReminderSubtitle =>
+      'The evening before your scheduled water day.';
 
   @override
   String bandReports(int count) {
